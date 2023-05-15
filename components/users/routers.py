@@ -10,6 +10,11 @@ user_router = APIRouter(
 )
 
 
+@user_router.get("/user/{id}/idRole", response_model=schemas.ValuesFromIdRole)
+def current_user(user_id: int, db: Session = Depends(get_db)):
+    return crud.get_user_role_by_id(db=db, user_id=user_id)
+
+
 @user_router.get("/features/{id}", response_model=schemas.UserFeatures)
 def get_features(user_id: int, db: Session = Depends(get_db)):
     db_features = crud.get_user_by_id(db=db, user_id=user_id)

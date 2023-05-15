@@ -48,6 +48,14 @@ class UserUpdate(BaseModel):
         orm_mode = True
 
 
+class ValuesFromIdRole(BaseModel):
+    name: str
+    description: str
+
+    class Config:
+        orm_mode = True
+
+
 class UserFeatures(BaseModel):
     id: str
     name: str

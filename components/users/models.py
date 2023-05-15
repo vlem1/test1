@@ -15,3 +15,9 @@ class User(Base):
     passwordHash = Column(String, nullable=False)
     idCluster = Column(Integer)
     markingDeletion = Column(Boolean, nullable=False)
+
+
+
+
+
+
