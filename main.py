@@ -4,6 +4,7 @@ from db import engine, Base
 from components.users.routers import user_router
 from components.roles.routers import role_router
 
+
 Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
