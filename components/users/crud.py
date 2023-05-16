@@ -2,11 +2,7 @@ from sqlalchemy.orm import Session
 from components.users import models
 from components.users import schemas
 from components.roles import models as roles_models
-'''
-def get_user_role_by_id(user_id: int, db: Session):
-    db_user = db.query(models.User).get(user_id)
-    return db_user
-'''
+from components.clusters import models as cluster_models
 
 
 def get_user_role_by_id(user_id: int, db: Session):
@@ -18,6 +14,16 @@ def get_user_role_by_id(user_id: int, db: Session):
         filter(models.User.id == user_id). \
         join(roles_models.Role, roles_models.Role.id == models.User.idRole).first()
     return role_db
+
+
+def get_user_cluster_by_id(user_id: int, db: Session):
+    cluster_db = db.query(
+        models.User.idRole,
+        cluster_models.Cluster.name,
+                        ). \
+        filter(models.User.id == user_id). \
+        join(cluster_models.Cluster, cluster_models.Cluster.id == models.User.idCluster).first()
+    return cluster_db
 
 
 def get_user_by_id(user_id: int, db: Session):
