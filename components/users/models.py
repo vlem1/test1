@@ -13,7 +13,7 @@ class User(Base):
     position = Column(String)
     login = Column(String, nullable=False)
     passwordHash = Column(String, nullable=False)
-    idCluster = Column(Integer)
+    idCluster = Column(Integer, ForeignKey("Cluster.id"))
     markingDeletion = Column(Boolean, nullable=False)
 
 

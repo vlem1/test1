@@ -56,6 +56,13 @@ class ValuesFromIdRole(BaseModel):
         orm_mode = True
 
 
+class ValuesFromIdCluster(BaseModel):
+    name: str
+
+    class Config:
+        orm_mode = True
+
+
 class UserFeatures(BaseModel):
     id: str
     name: str
