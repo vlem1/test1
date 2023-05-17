@@ -3,6 +3,7 @@ from components.users import models
 from components.users import schemas
 from components.roles import models as roles_models
 from components.clusters import models as cluster_models
+from components.projects import models as project_models
 
 
 def get_user_role_by_id(user_id: int, db: Session):
@@ -24,6 +25,18 @@ def get_user_cluster_by_id(user_id: int, db: Session):
         filter(models.User.id == user_id). \
         join(cluster_models.Cluster, cluster_models.Cluster.id == models.User.idCluster).first()
     return cluster_db
+
+
+def get_user_projects_by_id(db: Session, user_id: int):
+    projects_db = db.query(
+        models.User.idRole,
+        project_models.Project.name,
+        project_models.Project.description,
+        project_models.Project.idAutor,
+    ). \
+        filter(models.User.id == user_id). \
+        join(project_models.Project, project_models.Project.idAutor == models.User.id).all()
+    return projects_db
 
 
 def get_user_by_id(user_id: int, db: Session):
@@ -63,3 +76,5 @@ def create_user(user: schemas.AddNewUser, db: Session):
     db.commit()
     db.refresh(db_user)
     return db_user
+
+

@@ -20,6 +20,11 @@ def current_user(user_id: int, db: Session = Depends(get_db)):
     return crud.get_user_cluster_by_id(db=db, user_id=user_id)
 
 
+@user_router.get("/user/{id}/projects", response_model=list[schemas.ValuesFromProjects])
+def current_user(user_id: int, db: Session = Depends(get_db)):
+    return crud.get_user_projects_by_id(db=db, user_id=user_id)
+
+
 @user_router.get("/features/{id}", response_model=schemas.UserFeatures)
 def get_features(user_id: int, db: Session = Depends(get_db)):
     db_features = crud.get_user_by_id(db=db, user_id=user_id)

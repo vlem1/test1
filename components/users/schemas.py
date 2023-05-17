@@ -17,10 +17,11 @@ class User(BaseModel):
     name: str
     surname: str
     login: str
-    password: str
+    passwordHash: str
     idRole: int
     position: str
     idCluster: int
+    markingDeletion: bool
 
     class Config:
         orm_mode = True
@@ -58,6 +59,15 @@ class ValuesFromIdRole(BaseModel):
 
 class ValuesFromIdCluster(BaseModel):
     name: str
+
+    class Config:
+        orm_mode = True
+
+
+class ValuesFromProjects(BaseModel):
+    name: str
+    description: str
+    idAutor: int
 
     class Config:
         orm_mode = True
