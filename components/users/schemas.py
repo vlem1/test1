@@ -1,4 +1,5 @@
 from pydantic import BaseModel
+from datetime import datetime
 
 
 class Input(BaseModel):
@@ -22,6 +23,7 @@ class User(BaseModel):
     position: str
     idCluster: int
     markingDeletion: bool
+    createData: datetime
 
     class Config:
         orm_mode = True
@@ -36,6 +38,7 @@ class AddNewUser(BaseModel):
     passwordHash: str
     idCluster: int
     markingDeletion: bool
+    createData: datetime
 
     class Config:
         orm_mode = True
@@ -92,6 +95,7 @@ class UserFeatures(BaseModel):
     passwordHash: str
     idCluster: int
     markingDeletion: bool
+    createData: datetime
 
     class Config:
         orm_mode = True

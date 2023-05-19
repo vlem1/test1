@@ -1,10 +1,12 @@
 from pydantic import BaseModel
+from datetime import datetime
 
 
 class Project(BaseModel):
     name: str
     description: str
     idAutor: int
+    createData: datetime
 
     class Config:
         orm_mode = True
@@ -23,6 +25,7 @@ class ProjectFeatures(BaseModel):
     name: str
     description: str
     idAutor: int
+    createData: datetime
 
     class Config:
         orm_mode = True
@@ -37,6 +40,7 @@ class UserFromProject(BaseModel):
     position: str
     idCluster: int
     markingDeletion: bool
+    createData: datetime
 
     class Config:
         orm_mode = True
