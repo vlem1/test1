@@ -4,6 +4,7 @@ from components.users import schemas
 from components.roles import models as roles_models
 from components.clusters import models as cluster_models
 from components.projects import models as project_models
+from components.tasks import models as task_models
 
 
 def get_user_role_by_id(user_id: int, db: Session):
@@ -37,6 +38,14 @@ def get_user_projects_by_id(db: Session, user_id: int):
         filter(models.User.id == user_id). \
         join(project_models.Project, project_models.Project.idAutor == models.User.id).all()
     return projects_db
+
+
+def get_user_tasks_by_id(db: Session, user_id: int):
+    task_db = db.query(
+        task_models.Task
+    ).filter(project_models.Project.idAutor == user_id) \
+        .filter(task_models.Task.idProject == project_models.Project.id).all()
+    return task_db
 
 
 def get_user_by_id(user_id: int, db: Session):

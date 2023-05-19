@@ -29,7 +29,13 @@ def current_user(user_id: int, db: Session = Depends(get_db)):
 
 @user_router.get("/{id}/projects", response_model=list[schemas.ValuesFromProjects])
 def current_user(user_id: int, db: Session = Depends(get_db)):
-    crud.get_user_projects_by_id(db=db, user_id=user_id)
+    crud.get_user_tasks_by_id(db=db, user_id=user_id)
+    return JSONResponse(status_code=200, content=configP.get('users', 'user_found_success'))
+
+
+@user_router.get("/{id}/tasks", response_model=list[schemas.ValuesFromTasks])
+def current_user(user_id: int, db: Session = Depends(get_db)):
+    crud.get_user_tasks_by_id(db=db, user_id=user_id)
     return JSONResponse(status_code=200, content=configP.get('users', 'user_found_success'))
 
 
