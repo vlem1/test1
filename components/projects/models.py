@@ -1,6 +1,5 @@
-from sqlalchemy import Column, ForeignKey, Integer, String
-from sqlalchemy.orm import relationship, backref
-import sqlalchemy as sa
+from sqlalchemy import Column, ForeignKey, Integer, String, TIMESTAMP
+from datetime import datetime
 from db import Base
 
 
@@ -11,5 +10,6 @@ class Project(Base):
     name = Column(String, nullable=False)
     description = Column(String, nullable=False)
     idAutor = Column(Integer, ForeignKey("User.id"), index=True)
+    createData = Column(TIMESTAMP, nullable=False, default=datetime.utcnow)
     # projects = relationship('User', backref=backref('Project', cascade="save-update, merge, delete"))
 

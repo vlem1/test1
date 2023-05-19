@@ -1,5 +1,6 @@
-from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
+from sqlalchemy import Boolean, Column, ForeignKey, Integer, String, TIMESTAMP
 from sqlalchemy.orm import relationship, backref
+from datetime import datetime
 import sqlalchemy as sa
 from db import Base
 
@@ -16,5 +17,6 @@ class User(Base):
     passwordHash = Column(String, nullable=False)
     idCluster = Column(Integer, ForeignKey("Cluster.id"))
     markingDeletion = Column(Boolean, nullable=False)
+    createData = Column(TIMESTAMP, nullable=False, default=datetime.utcnow)
 
     users_project = relationship('Project', backref=backref('User', cascade="save-update, merge, delete"))
