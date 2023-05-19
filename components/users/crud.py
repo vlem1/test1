@@ -57,7 +57,6 @@ def delete_user(user_id: int, db: Session):
     db_user = get_user_by_id(user_id, db=db)
     db.delete(db_user)
     db.commit()
-    db.refresh(db_user)
     return db_user
 
 

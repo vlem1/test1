@@ -57,3 +57,10 @@ def get_update_project_blocks(db: Session, project_id: int, update_project: sche
         return db_project
 
 
+def delete_project(project_id: int, db: Session):
+    db_project = get_project_by_id(project_id, db=db)
+    db.delete(db_project)
+    db.commit()
+    return db_project
+
+

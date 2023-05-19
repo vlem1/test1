@@ -24,6 +24,13 @@ def get_cluster_list(db: Session):
     return db_user
 
 
+def delete_cluster(cluster_id: int, db: Session):
+    db_cluster = get_cluster_by_id(cluster_id, db=db)
+    db.delete(db_cluster)
+    db.commit()
+    return db_cluster
+
+
 
 
 
