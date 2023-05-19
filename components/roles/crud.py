@@ -21,7 +21,6 @@ def delete_role(role_id: int, db: Session):
     db_role = get_role_by_id(role_id, db=db)
     db.delete(db_role)
     db.commit()
-    db.refresh(db_role)
     return db_role
 
 
@@ -35,13 +34,3 @@ def create_user_role(role: schemas.Role, db: Session):
     db.refresh(db_role)
     return db_role
 
-
-def create_role(role: schemas.AddNewRole, db: Session):
-    db_role = models.User(
-        name=role.name,
-        description=role.description
-    )
-    db.add(db_role)
-    db.commit()
-    db.refresh(db_role)
-    return db_role
