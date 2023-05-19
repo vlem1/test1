@@ -73,6 +73,15 @@ class ValuesFromProjects(BaseModel):
         orm_mode = True
 
 
+class ValuesFromTasks(BaseModel):
+    name: str
+    description: str
+    idProject: int
+
+    class Config:
+        orm_mode = True
+
+
 class UserFeatures(BaseModel):
     id: str
     name: str
