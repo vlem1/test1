@@ -9,7 +9,7 @@ from components.tasks.routers import task_router
 from config import *
 
 
-Base.metadata.create_all(bind=engine)
+# Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 
