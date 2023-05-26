@@ -1,4 +1,7 @@
+from select import select
+
 from sqlalchemy.orm import Session
+from sqlalchemy import or_
 from components.users import models
 from components.users import schemas
 from components.roles import models as roles_models
@@ -12,7 +15,7 @@ def get_user_role_by_id(user_id: int, db: Session):
         models.User.idRole,
         roles_models.Role.name,
         roles_models.Role.description
-                       ). \
+    ). \
         filter(models.User.id == user_id). \
         join(roles_models.Role, roles_models.Role.id == models.User.idRole).first()
     return role_db
@@ -22,7 +25,7 @@ def get_user_cluster_by_id(user_id: int, db: Session):
     cluster_db = db.query(
         models.User.idRole,
         cluster_models.Cluster.name,
-                        ). \
+    ). \
         filter(models.User.id == user_id). \
         join(cluster_models.Cluster, cluster_models.Cluster.id == models.User.idCluster).first()
     return cluster_db
@@ -85,4 +88,9 @@ def create_user(user: schemas.AddNewUser, db: Session):
     db.refresh(db_user)
     return db_user
 
+
+def get_user_by_letter(user_let: str, db: Session):
+    db_user = db.query(models.User)\
+        .filter(or_(models.User.name.contains(user_let), models.User.surname.contains(user_let))).all()
+    return db_user
 

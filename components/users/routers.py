@@ -54,6 +54,12 @@ def current_user(user_id: int, db: Session = Depends(get_db)):
     return JSONResponse(status_code=200, content=configP.get('users', 'user_found_success'))
 
 
+@user_router.get("/letters/search/user", response_model=list[schemas.User])
+def current_user(user_let: str, db: Session = Depends(get_db)):
+    return crud.get_user_by_letter(db=db, user_let=user_let)
+    # return JSONResponse(status_code=200, content=configP.get('users', 'user_found_success'))
+
+
 @user_router.put("/create")
 def current_user_add(user: schemas.AddNewUser, db: Session = Depends(get_db)):
     return crud.create_user(db=db, user=user)
