@@ -16,3 +16,11 @@ def get_db():
         yield db
     finally:
         db.close()
+
+
+def session(method):
+    def wrapped(*args, **kwargs):
+        with SessionLocal() as session:
+            res = method(session=session, *args, **kwargs)
+        return res
+    return wrapped

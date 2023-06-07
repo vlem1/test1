@@ -3,6 +3,7 @@ from sqlalchemy.orm import Session
 from components.projects import models
 from components.projects import schemas
 from components.users import models as users_models
+from db import session
 
 
 def create_project(db: Session, project: schemas.Project):
@@ -17,8 +18,9 @@ def create_project(db: Session, project: schemas.Project):
     return db_project
 
 
-def get_project_list(db: Session):
-    db_project = db.query(models.Project).all()
+@session
+def get_project_list(session: Session):
+    db_project = session.query(models.Project).all()
     return db_project
 
 
