@@ -6,13 +6,14 @@ from components.roles.routers import role_router
 from components.clusters.routers import cluster_router
 from components.projects.routers import project_router
 from components.tasks.routers import task_router
-from config import *
+from scheduler import cache
+from scheduler.cache import benchmark
 
 
 # Base.metadata.create_all(bind=engine)
+
 app = FastAPI()
-
-
+ca = cache.Cache
 app.include_router(user_router)
 app.include_router(role_router)
 app.include_router(cluster_router)

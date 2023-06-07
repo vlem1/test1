@@ -9,5 +9,5 @@ PG_HOST = os.environ.get('PG_HOST')
 PG_PORT = os.environ.get('PG_PORT')
 PG_DB_NAME = os.environ.get('PG_DB_NAME')
 
-
-
+REDIS_HOST = os.environ.get('REDIS_HOST')
+REDIS_PORT = os.environ.get('REDIS_PORT')
